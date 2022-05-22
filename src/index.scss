@@ -1,1 +1,7 @@
 @import '~bootstrap/scss/bootstrap';
+@import 'bootstrap/dist/css/bootstrap.css'; // or include from a CDN
+@import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
+
+#size-option{
+    margin-top: 5%;
+}
