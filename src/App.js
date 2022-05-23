@@ -11,6 +11,8 @@ import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import CreateOrder from './components/order/Create'
+import ViewOrders from './components/order/View'
+import HomePage from './components/order/Home'
 
 class App extends Component {
   constructor (props) {
@@ -69,6 +71,12 @@ class App extends Component {
               <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
             )}
           />
+          <Route
+            exact path='/'
+            render={() => (
+              <HomePage msgAlert={this.msgAlert} setUser={this.setUser} />
+            )}
+          />
           <AuthenticatedRoute
             user={user}
             path='/sign-out'
@@ -92,6 +100,13 @@ class App extends Component {
             path='/create-order'
             render={() => (
               <CreateOrder msgAlert={this.msgAlert} user={user} />
+            )}
+          />
+          <AuthenticatedRoute
+            user={user}
+            path='/my-orders'
+            render={() => (
+              <ViewOrders msgAlert={this.msgAlert} user={user} />
             )}
           />
         </main>
