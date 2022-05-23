@@ -13,3 +13,13 @@ export const createOrder = (data, user) => {
     }
   })
 }
+
+export const indexOrders = user => {
+  return axios({
+    method: 'GET',
+    url: apiUrl + '/orders',
+    headers: {
+      Authorization: `Bearer ${user.token}`
+    }
+  })
+}
