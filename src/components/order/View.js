@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { indexOrders } from '../../api/order'
+import { deleteOrder, indexOrders } from '../../api/order'
 import Accordion from 'react-bootstrap/Accordion'
+import { withRouter } from 'react-router-dom'
+import moment from 'moment'
 
 class ViewOrders extends Component {
   constructor (props) {
@@ -32,40 +34,62 @@ class ViewOrders extends Component {
       })
   }
 
-  // handlePending = (event) => {
-  //   const { orders } = this.state
-  //   event.preventDefault()
-  //   orders.forEach(order => {
-  //     document.getElementById('view-orders').innerHTML =
-  //     'Order Name: ' + order.name + '<br> Price:' + order.price + '<br>'
-  //     const drinks = order.drinks
-  //     drinks.forEach(drink => {
-  //       document.getElementById('view-orders').append(
-  //         drink.size + ' ' + drink.drinkType + ' Milk: ' + drink.milk + ' ' + drink.sugarLevel + '% sweet'
-  //       )
-  //     })
-  //   })
-  // }
+  handleCancel = (event) => {
+    event.preventDefault()
+    const id = event.target.getAttribute('id')
+    const { user, msgAlert } = this.props
+
+    deleteOrder(id, user)
+      .then(() => this.componentDidMount())
+      .then(() => {
+        msgAlert({
+          heading: 'Order Canceled',
+          message: 'Your order has been canceled',
+          variant: 'success'
+        })
+      })
+      .catch(error => {
+        msgAlert({
+          heading: 'Order cancelation failed',
+          message: 'Something went wrong: ' + error.message,
+          variant: 'danger'
+        })
+      })
+  }
 
   render () {
     const { orders } = this.state
+    const { history } = this.props
+    const pickUpTime = (createdAt) => moment(createdAt).add(15, 'm')
     let orderJSX
     if (orders === null) {
       orderJSX = 'You have no orders'
     } else {
+      orders.sort((a, b) => {
+        if (moment(a.createdAt) > moment(b.createdAt)) {
+          return -1
+        }
+        return 1
+      })
       orderJSX = orders.map(order => (
         <Accordion.Item key={order._id} eventKey={order._id}>
-          <Accordion.Header>{order.name} {order.createdAt}</Accordion.Header>
+          <Accordion.Header>{order.name} {moment(order.createdAt).format('LLL')}</Accordion.Header>
           <Accordion.Body>
-            <p>order date: {order.createdAt}</p>
-            <p>pick up time: </p>
-            <p>order status: </p>
+            <p>ordered at: {moment(order.createdAt).format('LLL')}</p>
+            <p>pick up time: {pickUpTime(order.createdAt).format('LT')} </p>
+            <p>order status: {pickUpTime(order.createdAt) > moment() ? 'Pending' : 'Complete'} </p>
             {order.drinks.map(drink => (
               <p key={drink._id}>
                 {drink.size} {drink.drinkType}, milk: {drink.milk }, sweetness level: {drink.sugarLevel}%
               </p>
             ))}
-            price: ${order.price}
+            <p>price: ${order.price}</p>
+            {pickUpTime(order.createdAt) > moment() &&
+              <div>
+                <button onClick={() => history.push(`/update-order/${order._id}`)}>modify</button>
+                <button id={order._id} onClick={this.handleCancel}>cancel</button>
+              </div>
+            }
           </Accordion.Body>
         </Accordion.Item>
       ))
@@ -84,4 +108,4 @@ class ViewOrders extends Component {
   }
 }
 
-export default ViewOrders
+export default withRouter(ViewOrders)

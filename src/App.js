@@ -13,6 +13,7 @@ import ChangePassword from './components/auth/ChangePassword'
 import CreateOrder from './components/order/Create'
 import ViewOrders from './components/order/View'
 import HomePage from './components/order/Home'
+import UpdateOrder from './components/order/Update'
 
 class App extends Component {
   constructor (props) {
@@ -107,6 +108,13 @@ class App extends Component {
             path='/my-orders'
             render={() => (
               <ViewOrders msgAlert={this.msgAlert} user={user} />
+            )}
+          />
+          <AuthenticatedRoute
+            user={user}
+            path='/update-order/:id'
+            render={() => (
+              <UpdateOrder msgAlert={this.msgAlert} user={user} />
             )}
           />
         </main>

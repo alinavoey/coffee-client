@@ -2,11 +2,6 @@
 @import 'bootstrap/dist/css/bootstrap.css'; // or include from a CDN
 @import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 
-
-#size-option{
-    margin-top: 5%;
-}
-
 // .hero-img{
 //     left: 0;
 //     position: absolute;
@@ -60,6 +55,8 @@
 
 .icon-img{
     margin-right: 10px;
+    height: 30px;
+    width: inherit;
 }
 
 .navbar{
@@ -84,4 +81,9 @@
 
 .navbar-expand-md .navbar-collapse {
     justify-content: flex-end;
+}
+
+.sugar-option{
+    margin-bottom: 3%;
+
 }
