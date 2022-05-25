@@ -12,6 +12,10 @@
 //     z-index: -1;
 // }
 
+html{
+    scroll-behavior: smooth;
+  }
+
 .hero {
     display: block;
     position: absolute;
@@ -83,7 +87,138 @@
     justify-content: flex-end;
 }
 
-.sugar-option{
-    margin-bottom: 3%;
+// .drink-grid{
+//     display: grid;
+//     grid-template-columns: repeat(2, 30%);
+//     grid-template-rows: repeat(2, 1fr);
+//     column-gap: 20px;
+//     row-gap: 20px;
+//     align-content: center; 
+//     justify-content: center;
+// }
 
+.drink-option h4, .milk-option h4, .sugar-option h4, .size-option h4{
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.drink-option, .milk-option, .sugar-option, .size-option, .order-details{
+    text-align: center;
+    height: 100vh;
+    width: inherit;
+    padding-top: 5%;
+    border: 1px solid black;
+}
+
+.drink-option img{
+    width: 200px;
+    height: inherit;
+    margin: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.drink-option img:hover{
+    opacity: 80%;
+}
+
+[type=radio]:checked + img{
+    border: 2px solid black;
+    opacity: 80%;
+}
+
+.form-milk-img{
+    border: 1px solid black;
+    margin: 10px 20px;
+    padding: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.form-milk-img:hover{
+    background-color: whitesmoke;
+}
+
+.form-milk-img img{
+    width: 150px;
+    height: inherit;
+}
+
+.sugar-option h4{
+    text-align: center;
+    margin-bottom: 10%;
+}
+
+.sugar-slider{
+    margin: 5% 0;
+}
+
+
+.size-option label{
+    padding: 20px;
+    margin: 0 10px;
+    border-radius: 10px;
+}
+
+.form-size-s-img img, .form-size-m-img img, .form-size-l-img img{
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.form-size-s-img img:hover, .form-size-m-img img:hover, .form-size-l-img img:hover{
+    background-color: whitesmoke;
+}
+
+.form-size-s-img img{
+    width: 150px;
+    height: inherit;
+}
+
+.form-size-m-img img{
+    width: 200px;
+    height: inherit;
+}
+
+.form-size-l-img img{
+    width: 250px;
+    height: inherit;
+}
+
+.arrow-down img{
+    width: 80px;
+    height: inherit;
+    margin-top: 12%;
+    opacity: 80%;
+}
+
+.arrow-up img{
+    width: 80px;
+    height: inherit;
+    opacity: 70%;
+}
+
+.arrow-up img:hover, .arrow-down img:hover{
+    opacity: 100%;
+}
+
+.add-drink-btn{
+    text-align: center;
+    margin-top: 5%;
+}
+
+.add-drink-btn button{
+    padding: 20px 60px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    background-color: #f2f2f2ba;
+    color: black;
+    border: 4px solid #34312d;
+}
+
+.add-drink-btn button:hover{
+    background-color: #b3784e;
+    color: white;
+    border: 4px solid white;
 }
