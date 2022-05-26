@@ -8,17 +8,19 @@ class OrderForm extends Component {
     return (
       <>
         <form onSubmit={this.props.handleSubmit}>
+          {/* Drink images credit to Starbucks */}
           <div id='drink-section' className='drink-option'>
             <h4>Drink Selection</h4>
             <div className='drink-grid'>
               <label>
                 <input
+                  required
                   type="radio"
                   name="drinkType"
                   value='Coffee'
                   onChange={this.props.onDrinkOption}
                   checked={this.props.drink.drinkType === 'Coffee'}
-                /> <div className='form-coffee-img'><img src={process.env.PUBLIC_URL + '/drink-coffee.jpg'}/></div> Coffee
+                /> <img src={process.env.PUBLIC_URL + '/drink-coffee.jpg'}/> Coffee
               </label>
               <label>
                 <input
@@ -27,7 +29,7 @@ class OrderForm extends Component {
                   value='Latte'
                   onChange={this.props.onDrinkOption}
                   checked={this.props.drink.drinkType === 'Latte'}
-                /> <div className='form-coffee-img'><img src={process.env.PUBLIC_URL + '/drink-latte.jpg'}/></div> Latte
+                /> <img src={process.env.PUBLIC_URL + '/drink-latte.jpg'}/> Latte
               </label>
               <label>
                 <input
@@ -36,7 +38,7 @@ class OrderForm extends Component {
                   value='Americano'
                   onChange={this.props.onDrinkOption}
                   checked={this.props.drink.drinkType === 'Americano'}
-                /> <div className='form-coffee-img'><img src={process.env.PUBLIC_URL + '/drink-americano.jpg'}/></div>  Americano
+                /> <img src={process.env.PUBLIC_URL + '/drink-americano.jpg'}/> Americano
               </label>
               <label>
                 <input
@@ -45,7 +47,7 @@ class OrderForm extends Component {
                   value='Capuccino'
                   onChange={this.props.onDrinkOption}
                   checked={this.props.drink.drinkType === 'Capuccino'}
-                /> <div className='form-coffee-img'><img src={process.env.PUBLIC_URL + '/drink-capp.jpg'}/></div> Capuccino
+                /> <img src={process.env.PUBLIC_URL + '/drink-capp.jpg'}/> Capuccino
               </label>
             </div>
             <div className='arrow-down'><a href='#milk-section'><img src={process.env.PUBLIC_URL + '/arrow-down.png'}/></a></div>
@@ -54,42 +56,45 @@ class OrderForm extends Component {
           <div id='milk-section' className='milk-option'>
             <div className='arrow-up'><a href='#drink-section'><img src={process.env.PUBLIC_URL + '/arrow-up.png'}/></a></div>
             <h4>Milk Option</h4>
-            <label>
-              <input
-                type="radio"
-                name="milk"
-                value='Whole'
-                onChange={this.props.onDrinkOption}
-                checked={this.props.drink.milk === 'Whole'}
-              /> <div className='form-milk-img'><img src={process.env.PUBLIC_URL + '/milk-whole.png'}/></div> Whole
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="milk"
-                value='Oat'
-                onChange={this.props.onDrinkOption}
-                checked={this.props.drink.milk === 'Oat'}
-              /> <div className='form-milk-img'><img src={process.env.PUBLIC_URL + '/milk-oat.png'}/></div> Oat
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="milk"
-                value='Almond'
-                onChange={this.props.onDrinkOption}
-                checked={this.props.drink.milk === 'Almond'}
-              /> <div className='form-milk-img'><img src={process.env.PUBLIC_URL + '/milk-almond.png'}/></div> Almond
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="milk"
-                value='None'
-                onChange={this.props.onDrinkOption}
-                checked={this.props.drink.milk === 'None'}
-              /> <div className='form-milk-img'><img src={process.env.PUBLIC_URL + '/milk-none.png'}/></div> None
-            </label>
+            <div className='milk-grid'>
+              <label>
+                <input
+                  required
+                  type="radio"
+                  name="milk"
+                  value='Whole'
+                  onChange={this.props.onDrinkOption}
+                  checked={this.props.drink.milk === 'Whole'}
+                /> <img className='milk-img' src={process.env.PUBLIC_URL + '/milk-whole.png'}/> Whole
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="milk"
+                  value='Oat'
+                  onChange={this.props.onDrinkOption}
+                  checked={this.props.drink.milk === 'Oat'}
+                /> <img className='milk-img' src={process.env.PUBLIC_URL + '/milk-oat.png'}/> Oat
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="milk"
+                  value='Almond'
+                  onChange={this.props.onDrinkOption}
+                  checked={this.props.drink.milk === 'Almond'}
+                /> <img className='milk-img' src={process.env.PUBLIC_URL + '/milk-almond.png'}/> Almond
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="milk"
+                  value='None'
+                  onChange={this.props.onDrinkOption}
+                  checked={this.props.drink.milk === 'None'}
+                /> <img className='milk-img' src={process.env.PUBLIC_URL + '/milk-none.png'}/> None
+              </label>
+            </div>
             <div className='arrow-down'><a href='#sugar-section'><img src={process.env.PUBLIC_URL + '/arrow-down.png'}/></a></div>
           </div>
 
@@ -118,33 +123,37 @@ class OrderForm extends Component {
           <div id='size-section' className='size-option'>
             <div className='arrow-up'><a href='#sugar-section'><img src={process.env.PUBLIC_URL + '/arrow-up.png'}/></a></div>
             <h4>Drink Size</h4>
-            <label>
-              <input
-                type="radio"
-                name="size"
-                value='Small'
-                onChange={this.props.onDrinkOption}
-                checked={this.props.drink.size === 'Small'}
-              /> <div className='form-size-s-img'><img src={process.env.PUBLIC_URL + '/drink-size.png'}/></div> Small
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="size"
-                value='Medium'
-                onChange={this.props.onDrinkOption}
-                checked={this.props.drink.size === 'Medium'}
-              /> <div className='form-size-m-img'><img src={process.env.PUBLIC_URL + '/drink-size.png'}/></div>  Medium
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="size"
-                value='Large'
-                onChange={this.props.onDrinkOption}
-                checked={this.props.drink.size === 'Large'}
-              /> <div className='form-size-l-img'><img src={process.env.PUBLIC_URL + '/drink-size.png'}/></div>  Large
-            </label>
+            <div className='size-grid'>
+              <label>
+                <input
+                  required
+                  type="radio"
+                  name="size"
+                  value='Small'
+                  onChange={this.props.onDrinkOption}
+                  checked={this.props.drink.size === 'Small'}
+                /> <img className='form-size-s-img' src={process.env.PUBLIC_URL + '/drink-size.png'}/> Small
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="size"
+                  value='Medium'
+                  onChange={this.props.onDrinkOption}
+                  checked={this.props.drink.size === 'Medium'}
+                /> <img className='form-size-m-img' src={process.env.PUBLIC_URL + '/drink-size.png'}/> Medium
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="size"
+                  value='Large'
+                  onChange={this.props.onDrinkOption}
+                  checked={this.props.drink.size === 'Large'}
+                /> <img className='form-size-l-img' src={process.env.PUBLIC_URL + '/drink-size.png'}/> Large
+              </label>
+            </div>
+
             <div className='add-drink-btn'>
               <button onClick={this.props.addDrink} type='click'>Add Drink</button>
             </div>
@@ -157,12 +166,14 @@ class OrderForm extends Component {
                 <p>{drink.size} {drink.drinkType}, Milk: {drink.milk}, Sweetness Level: {drink.sugarLevel}%</p>
               </div>
             ))}
-            <p>Total Price: ${this.props.order.price}</p>
+            <p><span className='order-price'>Total Price:</span> ${this.props.order.price}</p>
             <a href='#drink-section'>Add Another Drink</a>
+            <hr></hr>
 
             <div className="order-name">
               <label> Enter your name
                 <input
+                  required
                   type="text"
                   name="name"
                   placeholder='name'
@@ -175,6 +186,7 @@ class OrderForm extends Component {
             <div className="order-email">
               <label> Enter your email
                 <input
+                  required
                   type="text"
                   name="email"
                   placeholder='email'

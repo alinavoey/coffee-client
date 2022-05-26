@@ -75,19 +75,19 @@ class ViewOrders extends Component {
         <Accordion.Item key={order._id} eventKey={order._id}>
           <Accordion.Header>{order.name} {moment(order.createdAt).format('LLL')}</Accordion.Header>
           <Accordion.Body>
-            <p>ordered at: {moment(order.createdAt).format('LLL')}</p>
-            <p>pick up time: {pickUpTime(order.createdAt).format('LT')} </p>
-            <p>order status: {pickUpTime(order.createdAt) > moment() ? 'Pending' : 'Complete'} </p>
+            <p>Order Date: {moment(order.createdAt).format('LLL')}</p>
+            <p>Pick Up Time: {pickUpTime(order.createdAt).format('LT')} </p>
+            <p>Order Status: {pickUpTime(order.createdAt) > moment() ? 'Pending' : 'Complete'} </p>
             {order.drinks.map(drink => (
               <p key={drink._id}>
-                {drink.size} {drink.drinkType}, milk: {drink.milk }, sweetness level: {drink.sugarLevel}%
+                {drink.size} {drink.drinkType}, Milk: {drink.milk }, Sweetness Level: {drink.sugarLevel}%
               </p>
             ))}
-            <p>price: ${order.price}</p>
+            <p>Price: ${order.price}</p>
             {pickUpTime(order.createdAt) > moment() &&
-              <div>
-                <button onClick={() => history.push(`/update-order/${order._id}`)}>modify</button>
-                <button id={order._id} onClick={this.handleCancel}>cancel</button>
+              <div className='modify-cancel-btns'>
+                <button className='modify-btn' onClick={() => history.push(`/update-order/${order._id}`)}>Modify</button>
+                <button className='cancel-btn' id={order._id} onClick={this.handleCancel}>Cancel Order</button>
               </div>
             }
           </Accordion.Body>
@@ -96,7 +96,7 @@ class ViewOrders extends Component {
     }
     return (
       <>
-        <h1>My Orders</h1>
+        <h2 className='page-title'>My Orders</h2>
         <button type='click' onClick={this.handlePending}>Pending Orders</button>
         <button type='click' onClick={this.handlePrevious}>Previous Orders</button>
         <div id='view-orders'></div>

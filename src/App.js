@@ -14,6 +14,7 @@ import CreateOrder from './components/order/Create'
 import ViewOrders from './components/order/View'
 import HomePage from './components/order/Home'
 import UpdateOrder from './components/order/Update'
+import Menu from './components/order/Menu'
 
 class App extends Component {
   constructor (props) {
@@ -76,6 +77,12 @@ class App extends Component {
             exact path='/'
             render={() => (
               <HomePage msgAlert={this.msgAlert} setUser={this.setUser} />
+            )}
+          />
+          <Route
+            exact path='/menu'
+            render={() => (
+              <Menu msgAlert={this.msgAlert} setUser={this.setUser} />
             )}
           />
           <AuthenticatedRoute

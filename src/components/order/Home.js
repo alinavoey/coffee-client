@@ -9,7 +9,6 @@ class HomePage extends Component {
           {/* <h2 className='slogan'>Instant human. Just add coffee.</h2> */}
         </div>
         {/* <div className='hero'><img className='hero-img' src={process.env.PUBLIC_URL + '/coffee-resized.jpg'}/></div> */}
-        <div className='menu'>menu</div>
       </>
     )
   }

@@ -112,15 +112,15 @@ class UpdateOrder extends Component {
       drinkJSX = order.drinks.map(drink => (
         <div key={drink._id}>
           <p>
-            {drink.size} {drink.drinkType}, milk: {drink.milk }, sweetness level: {drink.sugarLevel}%
-            <button onClick={this.handleEdit} id={drink._id}>edit</button>
+            {drink.size} {drink.drinkType}, Milk: {drink.milk }, Sweetness Level: {drink.sugarLevel}%
+            <button className='update-btn' onClick={this.handleEdit} id={drink._id}>Update</button>
           </p>
         </div>
       ))
     }
     return (
       <>
-        <h4>Update Order</h4>
+        <h2 className='page-title'>Update Order</h2>
         <div>
           {drinkJSX}
         </div>

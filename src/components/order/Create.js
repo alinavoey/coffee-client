@@ -89,7 +89,7 @@ class CreateOrder extends Component {
   render () {
     return (
       <>
-        <h1>Lets order some coffee!</h1>
+        <h2 className='page-title'>Lets order some coffee!</h2>
         <OrderForm order={this.state.order} drink={this.state.drink} onDrinkOption={this.onDrinkOption} addDrink={this.addDrink} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
       </>
     )

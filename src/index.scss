@@ -18,15 +18,15 @@ html{
 
 .hero {
     display: block;
-    position: absolute;
+    position: fixed;
     left: 0;
     border: 1px solid black;
     background-position: 35% 65%;
     background-repeat: no-repeat;
     background-size: cover;
-    width: 100vw;
-    height: 80%;
-    z-index: -1;
+    height: 100vh;
+    width: inherit;
+    overflow: hidden;
 }
 
 .hero-msg {
@@ -40,10 +40,6 @@ html{
     text-transform: uppercase;
     letter-spacing: 4px;
     border-radius: 5px;
-}
-
-.menu {
-    display: block;
 }
 
 .logo{
@@ -64,6 +60,9 @@ html{
 }
 
 .navbar{
+    // z-index: 1;
+    // position: fixed;
+    // width: 100vw;
     background-color: whitesmoke;
     padding: 5px 30px;
 }
@@ -87,6 +86,57 @@ html{
     justify-content: flex-end;
 }
 
+.navbar-dark .navbar-nav .nav-link:focus{
+    color: black;
+}
+
+.menu-img-container{
+    max-height: 500px;
+	overflow: hidden;
+}
+
+.menu-img{
+	display: block; 
+    width: 100%;
+	max-width: 100%;
+	height: auto !important;
+}
+.menu-section{
+    text-align: center;
+}
+
+.menu-section img{
+    width: 100px;
+    height: inherit;
+    margin: 40px;
+}
+
+.menu-section h4{
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    margin-bottom: 40px;
+}
+
+.menu-section hr{
+    margin: 0 20%;
+}
+
+.menu{
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.menu h4{
+    margin: 10px 0;
+    letter-spacing: 4px;
+    font-size: 50px;
+}
+
+.menu p{
+    display: inline;
+    margin: 10px 20px;
+}
+
 // .drink-grid{
 //     display: grid;
 //     grid-template-columns: repeat(2, 30%);
@@ -96,6 +146,10 @@ html{
 //     align-content: center; 
 //     justify-content: center;
 // }
+
+.page-title{
+    padding-top: 10px;
+}
 
 .drink-option h4, .milk-option h4, .sugar-option h4, .size-option h4{
     margin-top: 20px;
@@ -107,42 +161,79 @@ html{
     height: 100vh;
     width: inherit;
     padding-top: 5%;
-    border: 1px solid black;
+    // border: 1px solid black;
 }
 
-.drink-option img{
+.drink-grid img{
+    display: block;
     width: 200px;
     height: inherit;
     margin: 20px;
     border-radius: 50%;
     cursor: pointer;
+    transition: 0.3s;
 }
 
-.drink-option img:hover{
+.drink-grid img:hover{
+    transition: 0.3s;
+    padding: 7%;
     opacity: 80%;
 }
 
-[type=radio]:checked + img{
-    border: 2px solid black;
+.drink-grid input[type=radio], .milk-grid input[type=radio], .size-grid input[type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.drink-grid input[type=radio]:checked + img{
+    padding: 7%;
     opacity: 80%;
 }
 
-.form-milk-img{
-    border: 1px solid black;
-    margin: 10px 20px;
-    padding: 30px;
+.milk-grid img{
+    display: block;
+    width: 200px;
+    height: inherit;
+    margin: 20px;
     border-radius: 50%;
     cursor: pointer;
+    border: 1px solid black;
+    padding: 6%;
+    transition: 0.3s;
 }
 
-.form-milk-img:hover{
-    background-color: whitesmoke;
+.milk-grid img:hover{
+    background-color: #102f1c;
+    transition: 0.3s;
+    padding: 40px;
+    opacity: 80%;
 }
 
-.form-milk-img img{
-    width: 150px;
-    height: inherit;
+.milk-grid input[type=radio]:checked + img{
+    background-color: #102f1c;
+    padding: 40px;
 }
+
+// .milk-img{
+//     width: 220px;
+//     height: inherit;
+//     margin: 20px;
+//     display: block;
+//     cursor: pointer;
+//     border-radius: 50%;
+//     padding: 6%;
+// }
+
+// .milk-img:hover{
+//     background-color: whitesmoke;
+// }
+
+// .milk-grid input[type=radio]:checked + img{
+//     background-color: whitesmoke;
+//     padding: 40px;
+// }
 
 .sugar-option h4{
     text-align: center;
@@ -160,27 +251,34 @@ html{
     border-radius: 10px;
 }
 
-.form-size-s-img img, .form-size-m-img img, .form-size-l-img img{
+.form-size-s-img, .form-size-m-img, .form-size-l-img{
+    display: block;
     cursor: pointer;
-    border-radius: 20px;
+    border-radius: 50%;
     padding: 10px;
 }
 
-.form-size-s-img img:hover, .form-size-m-img img:hover, .form-size-l-img img:hover{
+.form-size-s-img:hover, .form-size-m-img:hover, .form-size-l-img:hover{
     background-color: whitesmoke;
 }
 
-.form-size-s-img img{
+.size-grid input[type=radio]:checked + img{
+    border: 4px solid #595959;
+    background-color: whitesmoke;
+    padding: 10px;
+}
+
+.form-size-s-img{
     width: 150px;
     height: inherit;
 }
 
-.form-size-m-img img{
+.form-size-m-img{
     width: 200px;
     height: inherit;
 }
 
-.form-size-l-img img{
+.form-size-l-img{
     width: 250px;
     height: inherit;
 }
@@ -221,4 +319,72 @@ html{
     background-color: #b3784e;
     color: white;
     border: 4px solid white;
+}
+
+.order-price{
+    font-weight: bold;
+}
+
+.order-name{
+    margin-top: 5%;
+    margin-bottom: 20px;
+}
+
+.order-email{
+    margin: 20px 0;
+}
+
+.order-name input, .order-email input{
+    display: block;
+    margin-top: 5px;
+    margin-left: 10px;
+    padding: 5px 100px;
+    text-align: center;
+}
+
+.order-details button{
+    margin-top: 40px;
+    border: none;
+    padding: 20px 60px;
+    border-radius: 10px;
+    letter-spacing: 2px;
+    background-color: #588157;
+    color: white;
+}
+
+.order-details button:hover{
+    background-color: #a3b18a;
+}
+
+.order-details hr{
+    margin: 40px 200px;
+}
+
+.modify-cancel-btns button{
+    margin-right: 10px;
+    padding: 10px 30px;
+    border: 1px solid #34312d;
+}
+
+.cancel-btn:hover{
+    background-color: red;
+    border: none;
+    color: white;
+}
+
+.modify-btn:hover{
+    background-color: #ffbf69;
+    border: none;
+    color: white;
+}
+
+.update-btn{
+    border: none;
+    margin: 0 10px;
+    padding: 5px 20px;
+    border-radius: 10px;
+}
+
+.update-btn:hover{
+    background-color: #ffbf69;
 }
