@@ -192,7 +192,7 @@ html{
 
 .drink-grid input[type=radio]:checked + img{
     padding: 7%;
-    opacity: 80%;
+    opacity: 0.8;
 }
 
 .milk-grid img{
@@ -212,7 +212,7 @@ html{
     background-color: #102f1c;
     transition: 0.3s;
     padding: 40px;
-    opacity: 80%;
+    opacity: 0.8;
 }
 
 .milk-grid input[type=radio]:checked + img{
@@ -291,7 +291,7 @@ html{
     width: 80px;
     height: inherit;
     margin-top: 12%;
-    opacity: 80%;
+    opacity: 0.8;
     padding: 20px;
     border: 1px solid black;
     border-radius: 50%;
@@ -300,7 +300,7 @@ html{
 .arrow-up img{
     width: 80px;
     height: inherit;
-    opacity: 70%;
+    opacity: 0.7;
     padding: 20px;
     border: 1px solid black;
     border-radius: 50%;
