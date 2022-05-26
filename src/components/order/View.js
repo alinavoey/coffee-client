@@ -75,15 +75,16 @@ class ViewOrders extends Component {
         <Accordion.Item key={order._id} eventKey={order._id}>
           <Accordion.Header>{order.name} {moment(order.createdAt).format('LLL')}</Accordion.Header>
           <Accordion.Body>
-            <p>Order Date: {moment(order.createdAt).format('LLL')}</p>
-            <p>Pick Up Time: {pickUpTime(order.createdAt).format('LT')} </p>
-            <p>Order Status: {pickUpTime(order.createdAt) > moment() ? 'Pending' : 'Complete'} </p>
+            <p><span className='order-view-title'>Order Date:</span> {moment(order.createdAt).format('LLL')}</p>
+            <p><span className='order-view-title'>Pick Up Time:</span> {pickUpTime(order.createdAt).format('LT')} </p>
+            <p><span className='order-view-title'>Order Status:</span> {pickUpTime(order.createdAt) > moment() ? 'Pending' : 'Complete'} </p>
+            <p><span className='order-view-title'>Order Details:</span></p>
             {order.drinks.map(drink => (
               <p key={drink._id}>
                 {drink.size} {drink.drinkType}, Milk: {drink.milk }, Sweetness Level: {drink.sugarLevel}%
               </p>
             ))}
-            <p>Price: ${order.price}</p>
+            <p><span className='order-view-title'>Price:</span> ${order.price}</p>
             {pickUpTime(order.createdAt) > moment() &&
               <div className='modify-cancel-btns'>
                 <button className='modify-btn' onClick={() => history.push(`/update-order/${order._id}`)}>Modify</button>
@@ -97,8 +98,6 @@ class ViewOrders extends Component {
     return (
       <>
         <h2 className='page-title'>My Orders</h2>
-        <button type='click' onClick={this.handlePending}>Pending Orders</button>
-        <button type='click' onClick={this.handlePrevious}>Previous Orders</button>
         <div id='view-orders'></div>
         <Accordion>
           {orderJSX}

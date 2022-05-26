@@ -52,9 +52,9 @@ render () {
   return (
     <div className='row'>
       <div className='col-sm-10 col-md-8 mx-auto mt-5'>
-        <h3>Change Password</h3>
+        <h3 className='auth-title'>Change Password</h3>
         <Form onSubmit={this.onChangePassword}>
-          <Form.Group controlId='oldPassword'>
+          <Form.Group className='auth-form' controlId='oldPassword'>
             <Form.Label>Old password</Form.Label>
             <Form.Control
               required
@@ -65,7 +65,7 @@ render () {
               onChange={this.handleChange}
             />
           </Form.Group>
-          <Form.Group controlId='newPassword'>
+          <Form.Group className='auth-form' controlId='newPassword'>
             <Form.Label>New Password</Form.Label>
             <Form.Control
               required
@@ -76,7 +76,7 @@ render () {
               onChange={this.handleChange}
             />
           </Form.Group>
-          <Button variant='primary' type='submit'>Submit</Button>
+          <Button className='auth-btn' type='submit'>Submit</Button>
         </Form>
       </div>
     </div>

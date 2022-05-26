@@ -6,7 +6,6 @@ class HomePage extends Component {
       <>
         <div className='hero' style={{ backgroundImage: `url(${process.env.PUBLIC_URL + '/coffee-resized.jpg'})` }}>
           <h1 className='hero-msg'>Hey there, sleepy friend. Lets get you caffeinated.</h1>
-          {/* <h2 className='slogan'>Instant human. Just add coffee.</h2> */}
         </div>
         {/* <div className='hero'><img className='hero-img' src={process.env.PUBLIC_URL + '/coffee-resized.jpg'}/></div> */}
       </>

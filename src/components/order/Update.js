@@ -2,15 +2,30 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { showOrder, updateOrder } from '../../api/order'
 import OrderForm from './Form'
-// import Accordion from 'react-bootstrap/Accordion'
+import CompleteOrder from './Complete'
 
 class UpdateOrder extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      order: null
+      order: null,
+      drink: {
+        drinkType: '',
+        milk: '',
+        sugarLevel: 0,
+        size: ''
+      },
+      showHideForm: false,
+      showHideOrder: true
     }
+    this.hideComponent = this.hideComponent.bind(this)
+    // this.handleEdit = this.handleEdit.bind(this)
+    // this.handleRemove = this.handleRemove.bind(this)
+  }
+
+  hideComponent () {
+    this.setState({ showHideOrder: !this.state.showHideOrder, showHideForm: !this.state.showHideForm })
   }
 
   componentDidMount () {
@@ -36,17 +51,29 @@ class UpdateOrder extends Component {
 
   handleEdit = (event) => {
     event.preventDefault()
+    console.log('updating')
     const id = event.target.getAttribute('id')
     const { order } = this.state
+
     const drink = order.drinks.find(drink => drink._id === id)
     this.setState({ drink: drink })
+    this.hideComponent()
+  }
+
+  handleRemove = (event) => {
+    event.preventDefault()
+    const id = event.target.getAttribute('id')
+    const { order } = this.state
+
+    const drink = order.drinks.find(drink => drink._id === id)
+    const index = order.drinks.indexOf(drink)
+    order.drinks.splice(index, 1)
+    this.setState({ order: order })
   }
 
   onDrinkOption = (event) => {
-    // console.log(event.target.value)
     // set the value of drink state based on user selection
     const currentDrink = { ...this.state.drink, [event.target.name]: event.target.value }
-    // console.log(currentDrink)
     this.setState({ drink: currentDrink })
   }
 
@@ -55,12 +82,14 @@ class UpdateOrder extends Component {
     const currentOrder = this.state.order
     const drink = this.state.order.drinks.find(drink => drink._id === this.state.drink._id)
     const index = currentOrder.drinks.indexOf(drink)
-    console.log(index)
-    currentOrder.drinks[index] = this.state.drink
-    console.log(currentOrder.drinks)
+
+    if (drink) {
+      currentOrder.drinks[index] = this.state.drink
+    } else {
+      currentOrder.drinks.push(this.state.drink)
+    }
+
     this.setState({ order: currentOrder })
-    console.log(this.state.order)
-    console.log(this.state.drink)
 
     // calculate the cost of the drink
     // object to store drink prices based on drink size
@@ -71,14 +100,15 @@ class UpdateOrder extends Component {
     }
     const drinkOrder = this.state.order.drinks
     let drinkTotal = 0
+
     drinkOrder.forEach(drink => {
-      // console.log(drink.size)
       drinkTotal += drinkPrice[drink.size]
     })
+
     const orderTotal = Number.parseFloat(drinkTotal * 1.06).toFixed(2)
-    // console.log(orderTotal)
     const currentPrice = { ...this.state.order, price: orderTotal }
-    this.setState({ order: currentPrice })
+    this.setState({ order: currentPrice, drink: { sugarLevel: 0 } })
+    this.hideComponent()
   }
 
   handleChange = (event) => {
@@ -88,7 +118,6 @@ class UpdateOrder extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-
     const { user, msgAlert, history } = this.props
 
     updateOrder(this.state.order, this.state.order._id, user)
@@ -104,19 +133,10 @@ class UpdateOrder extends Component {
   }
 
   render () {
-    const { order } = this.state
+    const { showHideForm, showHideOrder, order } = this.state
     let drinkJSX
     if (order === null) {
       drinkJSX = 'Loading...'
-    } else {
-      drinkJSX = order.drinks.map(drink => (
-        <div key={drink._id}>
-          <p>
-            {drink.size} {drink.drinkType}, Milk: {drink.milk }, Sweetness Level: {drink.sugarLevel}%
-            <button className='update-btn' onClick={this.handleEdit} id={drink._id}>Update</button>
-          </p>
-        </div>
-      ))
     }
     return (
       <>
@@ -124,7 +144,10 @@ class UpdateOrder extends Component {
         <div>
           {drinkJSX}
         </div>
-        {this.state.drink ? <OrderForm order={this.state.order} drink={this.state.drink} onDrinkOption={this.onDrinkOption} addDrink={this.addDrink} handleChange={this.handleChange} handleSubmit={this.handleSubmit} /> : ''}
+        {showHideForm && <OrderForm order={this.state.order} drink={this.state.drink} onDrinkOption={this.onDrinkOption} addDrink={this.addDrink} />}
+        {order && showHideOrder &&
+          <CompleteOrder order={this.state.order} hideComponent={this.hideComponent} handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleEdit={this.handleEdit} handleRemove={this.handleRemove}/>
+        }
       </>
     )
   }

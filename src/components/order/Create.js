@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 
 import { createOrder } from '../../api/order'
+import CompleteOrder from './Complete'
 import OrderForm from './Form'
-// import Button from 'react-bootstrap/Button'
-// import Form from 'react-bootstrap/Form'
 
 class CreateOrder extends Component {
   constructor (props) {
@@ -22,18 +22,23 @@ class CreateOrder extends Component {
         milk: '',
         sugarLevel: 0,
         size: ''
-      }
+      },
+      showHideForm: true,
+      showHideOrder: false
     }
     this.onDrinkOption = this.onDrinkOption.bind(this)
     this.addDrink = this.addDrink.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.hideComponent = this.hideComponent.bind(this)
+  }
+
+  hideComponent () {
+    this.setState({ showHideOrder: !this.state.showHideOrder, showHideForm: !this.state.showHideForm })
   }
 
   onDrinkOption = (event) => {
-    // console.log(event.target.value)
     // set the value of drink state based on user selection
     const currentDrink = { ...this.state.drink, [event.target.name]: event.target.value }
-    // console.log(currentDrink)
     this.setState({ drink: currentDrink })
   }
 
@@ -53,14 +58,15 @@ class CreateOrder extends Component {
     }
     const drinkOrder = this.state.order.drinks
     let drinkTotal = 0
+
     drinkOrder.forEach(drink => {
-      // console.log(drink.size)
       drinkTotal += drinkPrice[drink.size]
     })
+
     const orderTotal = Number.parseFloat(drinkTotal * 1.06).toFixed(2)
-    // console.log(orderTotal)
     const currentPrice = { ...this.state.order, price: orderTotal }
-    this.setState({ order: currentPrice })
+    this.setState({ order: currentPrice, drink: { sugarLevel: 0 } })
+    this.hideComponent()
   }
 
   handleChange = (event) => {
@@ -70,12 +76,11 @@ class CreateOrder extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    console.log('order has been placed')
 
-    const { user, msgAlert } = this.props
+    const { user, msgAlert, history } = this.props
 
     createOrder(this.state.order, user)
-      .then(res => console.log(res.data))
+      .then(() => history.push('/my-orders'))
       .then(() => msgAlert({ heading: 'Order Placed!', message: 'Coffee Time!', variant: 'success' }))
       .catch(err => {
         msgAlert({
@@ -87,13 +92,19 @@ class CreateOrder extends Component {
   }
 
   render () {
+    const { showHideForm, showHideOrder } = this.state
     return (
       <>
         <h2 className='page-title'>Lets order some coffee!</h2>
-        <OrderForm order={this.state.order} drink={this.state.drink} onDrinkOption={this.onDrinkOption} addDrink={this.addDrink} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+        {showHideForm &&
+          <OrderForm order={this.state.order} drink={this.state.drink} onDrinkOption={this.onDrinkOption} addDrink={this.addDrink} />
+        }
+        {showHideOrder &&
+          <CompleteOrder order={this.state.order} hideComponent={this.hideComponent} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+        }
       </>
     )
   }
 }
 
-export default CreateOrder
+export default withRouter(CreateOrder)

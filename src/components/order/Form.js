@@ -7,7 +7,7 @@ class OrderForm extends Component {
   render () {
     return (
       <>
-        <form onSubmit={this.props.handleSubmit}>
+        <form>
           {/* Drink images credit to Starbucks */}
           <div id='drink-section' className='drink-option'>
             <h4>Drink Selection</h4>
@@ -104,7 +104,7 @@ class OrderForm extends Component {
             <div className="d-flex align-items-center justify-content-center">
               <Col className='sugar-slider' xs="6">
                 <RangeSlider
-                  variant='warning'
+                  variant='success'
                   value={this.props.drink.sugarLevel}
                   name="sugarLevel"
                   min={0}
@@ -155,48 +155,11 @@ class OrderForm extends Component {
             </div>
 
             <div className='add-drink-btn'>
-              <button onClick={this.props.addDrink} type='click'>Add Drink</button>
+              <a href='#order-section'>
+                <button onClick={this.props.addDrink} type='click'>Add Drink</button>
+              </a>
+              {/* <Link href='#order-section' onClick={this.props.addDrink}>Add Drink</Link> */}
             </div>
-          </div>
-
-          <div id='order-section' className='order-details'>
-            <h4>Order Details</h4>
-            {this.props.order.drinks.map(drink => (
-              <div key={drink._id}>
-                <p>{drink.size} {drink.drinkType}, Milk: {drink.milk}, Sweetness Level: {drink.sugarLevel}%</p>
-              </div>
-            ))}
-            <p><span className='order-price'>Total Price:</span> ${this.props.order.price}</p>
-            <a href='#drink-section'>Add Another Drink</a>
-            <hr></hr>
-
-            <div className="order-name">
-              <label> Enter your name
-                <input
-                  required
-                  type="text"
-                  name="name"
-                  placeholder='name'
-                  value = {this.props.order.name}
-                  onChange={this.props.handleChange}
-                />
-              </label>
-            </div>
-
-            <div className="order-email">
-              <label> Enter your email
-                <input
-                  required
-                  type="text"
-                  name="email"
-                  placeholder='email'
-                  value = {this.props.order.email}
-                  onChange={this.props.handleChange}
-                />
-              </label>
-            </div>
-
-            <button type='Submit'>Place Order</button>
           </div>
         </form>
       </>
