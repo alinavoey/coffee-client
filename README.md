@@ -6,7 +6,7 @@ This is an e-commerce application for a coffee shop, The Coffee Bean. Users can 
 
 ## Important Links
 
-[View Deployed App]()
+[View Deployed App](https://alinavoey.github.io/coffee-client/)
 
 [View Backend API Repo](https://github.com/alinavoey/coffee-server)
 
