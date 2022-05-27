@@ -7,9 +7,9 @@ import { Link, NavLink } from 'react-router-dom'
 const authenticatedOptions = (
   <Fragment>
     <NavDropdown title="Account" id="nav-dropdown">
-      <NavDropdown.Item><NavLink to='/my-orders' className='nav-link'>My Orders</NavLink></NavDropdown.Item>
-      <NavDropdown.Item><NavLink to='/change-password' className='nav-link'>Change Password</NavLink></NavDropdown.Item>
-      <NavDropdown.Item><NavLink to='/sign-out' className='nav-link'>Sign Out</NavLink></NavDropdown.Item>
+      <NavLink to='/my-orders' className='nav-link'>My Orders</NavLink>
+      <NavLink to='/change-password' className='nav-link'>Change Password</NavLink>
+      <NavLink to='/sign-out' className='nav-link'>Sign Out</NavLink>
     </NavDropdown>
     <NavLink to='/create-order' className='nav-link'>Order</NavLink>
     {/* <NavLink to='/my-orders' className='nav-link'>My Orders</NavLink>

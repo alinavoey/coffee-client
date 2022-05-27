@@ -7,7 +7,8 @@ class OrderForm extends Component {
   render () {
     return (
       <>
-        <form>
+        <h2 className='page-title'>Lets order some coffee!</h2>
+        <form onSubmit={this.props.addDrink}>
           {/* Drink images credit to Starbucks */}
           <div id='drink-section' className='drink-option'>
             <h4>Drink Selection</h4>
@@ -113,7 +114,7 @@ class OrderForm extends Component {
                   onChange={this.props.onDrinkOption}
                   tooltip="on"
                   tooltipPlacement='bottom'
-                  size="sm"
+                  size="lg"
                 />
               </Col>
             </div>
@@ -155,10 +156,7 @@ class OrderForm extends Component {
             </div>
 
             <div className='add-drink-btn'>
-              <a href='#order-section'>
-                <button onClick={this.props.addDrink} type='click'>Add Drink</button>
-              </a>
-              {/* <Link href='#order-section' onClick={this.props.addDrink}>Add Drink</Link> */}
+              <button type='submit'>Add Drink</button>
             </div>
           </div>
         </form>

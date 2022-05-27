@@ -23,6 +23,7 @@ class CreateOrder extends Component {
         sugarLevel: 0,
         size: ''
       },
+      idx: undefined,
       showHideForm: true,
       showHideOrder: false
     }
@@ -42,13 +43,27 @@ class CreateOrder extends Component {
     this.setState({ drink: currentDrink })
   }
 
-  addDrink = (event) => {
+  handleEdit = (event) => {
     event.preventDefault()
-    const currentOrder = this.state.order
-    // add drink to order and set the state
-    currentOrder.drinks.push(this.state.drink)
-    this.setState({ order: currentOrder })
+    const id = event.target.getAttribute('id')
+    const { order } = this.state
 
+    const drink = order.drinks[id]
+    this.setState({ drink: drink, idx: id })
+    this.hideComponent()
+  }
+
+  handleRemove = (event) => {
+    event.preventDefault()
+    const id = event.target.getAttribute('id')
+    const { order } = this.state
+    order.drinks.splice(id, 1)
+    this.setState({ order: order })
+
+    this.updatePrice()
+  }
+
+  updatePrice = () => {
     // calculate the cost of the drink
     // object to store drink prices based on drink size
     const drinkPrice = {
@@ -65,7 +80,38 @@ class CreateOrder extends Component {
 
     const orderTotal = Number.parseFloat(drinkTotal * 1.06).toFixed(2)
     const currentPrice = { ...this.state.order, price: orderTotal }
-    this.setState({ order: currentPrice, drink: { sugarLevel: 0 } })
+    this.setState({ order: currentPrice })
+  }
+
+  addDrink = (event) => {
+    event.preventDefault()
+    const currentOrder = this.state.order
+    const idx = this.state.idx
+
+    if (idx) {
+      currentOrder.drinks[idx] = this.state.drink
+    } else {
+      currentOrder.drinks.push(this.state.drink)
+    }
+    this.setState({ order: currentOrder })
+
+    // calculate the cost of the drink
+    // object to store drink prices based on drink size
+    const drinkPrice = {
+      Small: 2,
+      Medium: 3,
+      Large: 4
+    }
+    const drinkOrder = this.state.order.drinks
+    let drinkTotal = 0
+
+    drinkOrder.forEach(drink => {
+      drinkTotal += drinkPrice[drink.size]
+    })
+
+    const orderTotal = (drinkTotal * 1.06).toFixed(2)
+    const currentPrice = { ...this.state.order, price: orderTotal }
+    this.setState({ order: currentPrice, drink: { sugarLevel: 0 }, idx: undefined })
     this.hideComponent()
   }
 
@@ -95,12 +141,11 @@ class CreateOrder extends Component {
     const { showHideForm, showHideOrder } = this.state
     return (
       <>
-        <h2 className='page-title'>Lets order some coffee!</h2>
         {showHideForm &&
           <OrderForm order={this.state.order} drink={this.state.drink} onDrinkOption={this.onDrinkOption} addDrink={this.addDrink} />
         }
         {showHideOrder &&
-          <CompleteOrder order={this.state.order} hideComponent={this.hideComponent} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+          <CompleteOrder order={this.state.order} handleEdit={this.handleEdit} handleRemove={this.handleRemove} hideComponent={this.hideComponent} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
         }
       </>
     )

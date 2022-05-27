@@ -84,7 +84,7 @@ class ViewOrders extends Component {
                 {drink.size} {drink.drinkType}, Milk: {drink.milk }, Sweetness Level: {drink.sugarLevel}%
               </p>
             ))}
-            <p><span className='order-view-title'>Price:</span> ${order.price}</p>
+            <p><span className='order-view-title'>Price:</span> ${order.price.toFixed(2)}</p>
             {pickUpTime(order.createdAt) > moment() &&
               <div className='modify-cancel-btns'>
                 <button className='modify-btn' onClick={() => history.push(`/update-order/${order._id}`)}>Modify</button>
