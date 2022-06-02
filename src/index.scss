@@ -472,3 +472,153 @@ html{
     border-color:#595959;
     box-shadow: none;
 }
+
+@media only screen and (max-width: 600px) {
+    .hero {
+        background-position: 48%;
+        border: none;
+    }
+    .hero-msg {
+        width: 80%;
+        margin-top: 10%;
+        margin-left: 10%;
+        margin-right: 5%;
+        font-size: 20px;
+        padding: 30px 35px;
+        text-align: center;
+    }
+
+    .logo{
+        font-size: 16px;
+        font-weight:600;
+        color:#34312d;
+    }
+    .icon-img{
+        height: 20px;
+        width: inherit;
+    }
+
+    .navbar-toggler-icon{
+        width: 25px;
+    }
+    .navbar-toggler{
+        border: none;
+    }
+    
+    .menu-section img{
+        width: 60px;
+        height: inherit;
+        margin: 15px;
+    }
+    
+    .menu h4{
+        margin: 30px 10px;
+        letter-spacing: 4px;
+        font-size: 40px;
+    }
+    
+    .menu p{
+        display: inline;
+        margin: 15px 5px;
+    }
+
+    .drink-option h4, .milk-option h4, .sugar-option h4, .size-option h4{
+        border-bottom: 1px solid #34312d;
+        padding-bottom: 20px;
+        margin: 10px 50px;
+    }
+
+    .drink-grid{
+        margin-bottom: 10%;
+    }
+    
+    .drink-grid img{
+        width: 100px;
+        height: inherit;
+    }
+
+    .milk-grid img{
+        width: 100px;
+        height: inherit;
+    }
+
+    .milk-grid input[type=radio]:checked + img{
+        background-color: #102f1c;
+        padding: 20px;
+    }
+
+    .sugar-option h4{
+        margin: 20%;
+    }
+    
+    .sugar-slider{
+        margin: 30% 0;
+        width: 85%;
+    }
+
+    .form-size-s-img{
+        width: 90px;
+        height: inherit;
+    }
+    
+    .form-size-m-img{
+        width: 115px;
+        height: inherit;
+    }
+    
+    .form-size-l-img{
+        width: 135px;
+        height: inherit;
+    }
+
+    .form-size-s-img, .form-size-m-img, .form-size-l-img{
+        padding: 5px;
+    }
+
+    .add-drink-btn button{
+        margin: 5%;
+    }
+    
+    .order-name input, .order-email input{
+        padding: 5px 50px;
+    }
+
+    .modify-cancel-btns button{
+        margin: 5px;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+    }
+    
+    .cancel-btn{
+        background-color: #b90504;
+        color: white;
+    }
+    
+    .modify-btn{
+        background-color: #ffbf69;
+        color: white;
+    }
+
+    .accordion-item {
+        margin: 5%;
+    }
+
+    .dropdown-menu{
+        background-color: inherit;
+        border: none;
+    }
+
+    .arrow-down img{
+        width: 100px;
+        height: inherit;
+        border: none;
+    }
+    
+    .arrow-up img{
+        width: 100px;
+        height: inherit;
+        border: none;
+    }
+
+}
